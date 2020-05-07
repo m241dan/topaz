@@ -946,7 +946,7 @@ function calculateMagicBurst(caster, spell, target, params)
     return burst
 end
 
-function addBonuses(caster, spell, target, dmg, params)
+function    addBonuses(caster, spell, target, dmg, params)
     params = params or {}
 
     local ele = spell:getElement()
