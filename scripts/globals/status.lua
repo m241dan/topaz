@@ -1553,6 +1553,17 @@ tpz.mod =
     AGGRESSOR_DURATION              = 955, -- Aggressor Duration
     DEFENDER_DURATION               = 956, -- Defender Duration
 
+    -- New version for Staff Mods
+    -- https://www.bg-wiki.com/bg/Vulcan%27s_Staff
+    FIRE_MAGIC_POTENCY        = 970,
+    EARTH_MAGIC_POTENCY       = 971,
+    WATER_MAGIC_POTENCY       = 972,
+    WIND_MAGIC_POTENCY        = 973,
+    ICE_MAGIC_POTENCY         = 974,
+    LIGHTNING_MAGIC_POTENCY   = 975,
+    LIGHT_MAGIC_POTENCY       = 976,
+    DARK_MAGIC_POTENCY        = 977,
+
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
     -- SPARE = 958, -- stuff
