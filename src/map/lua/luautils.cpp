@@ -80,6 +80,7 @@
 #include "../ai/states/magic_state.h"
 #include <optional>
 #include "../battlefield.h"
+#include <filesystem>
 
 namespace luautils
 {
@@ -173,6 +174,16 @@ namespace luautils
         lua_pop(LuaHandle, 1);
 
         contentRestrictionEnabled = (GetSettingsVariable("RESTRICT_CONTENT") != 0);
+
+        for( auto &p : std::filesystem::directory_iterator("scripts/modules") )
+        {
+            if (luaL_loadfile(LuaHandle, p.path().c_str()) || lua_pcall(LuaHandle, 0, 0, 0))
+            {
+                ShowError("luautils::Module(%s) failed to load: %s\n", p.path(), lua_tostring(LuaHandle, -1));
+                lua_pop(LuaHandle, 1);
+                return -1;
+            }
+        }
 
         ShowMessage("\t\t - " CL_GREEN"[OK]" CL_RESET"\n");
         return 0;
