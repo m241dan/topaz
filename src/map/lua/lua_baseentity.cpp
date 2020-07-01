@@ -14152,6 +14152,23 @@ inline int32 CLuaBaseEntity::getTHlevel(lua_State* L)
     return 1;
 }
 
+/************************************************************************
+*  Function: getCRlevel()
+*  Purpose : Return mob's current Casket Rate tier if alive, or its last if dead.
+*  Example : local CR = target:getCRlevel()
+*  Notes   :
+************************************************************************/
+
+inline int32 CLuaBaseEntity::getCRlevel(lua_State* L)
+{
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    CMobEntity* PMob = (CMobEntity*)m_PBaseEntity;
+    lua_pushinteger(L, PMob->isDead() ? PMob->m_CRLvl : PMob->PEnmityContainer->GetHighestCR());
+    return 1;
+}
+
 //=======================================================//
 
 const char CLuaBaseEntity::className[] = "CBaseEntity";

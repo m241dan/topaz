@@ -1067,6 +1067,7 @@ void CMobEntity::OnDespawn(CDespawnState&)
 void CMobEntity::Die()
 {
     m_THLvl = PEnmityContainer->GetHighestTH();
+	m_CRLvl = PEnmityContainer->GetHighestCR();										
     PEnmityContainer->Clear();
     PAI->ClearStateStack();
     if (PPet != nullptr && PPet->isAlive() && GetMJob() == JOB_SMN)
