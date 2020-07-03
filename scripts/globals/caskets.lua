@@ -171,7 +171,7 @@ local function dropChance(player)
     --end
 
     if player:hasStatusEffect(tpz.effect.PROWESS_CASKET_RATE) then
-        prowessCasketsPower = casketProwessEffect:GetHighestCR()
+        prowessCasketsPower = casketProwessPower:GetHighestCR()
     end
 
     local rand = math.random()
