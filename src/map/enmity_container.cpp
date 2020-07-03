@@ -173,8 +173,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         CE = std::clamp((int32)(CE * bonus), 0, EnmityCap);
         VE = std::clamp((int32)(VE * bonus), 0, EnmityCap);
 
-        m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, maxTH});
-		m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, maxCR});																		   
+        m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, maxTH, maxCR});																	   
 
         if (withMaster && PEntity->PMaster != nullptr)
         {
