@@ -36,6 +36,7 @@ struct EnmityObject_t
     int32 VE;                       // Volatile Enmity
     bool active;
     int16 maxTH;                    // Maximum Treasure Hunter level of this Enmity Owner
+	int16 maxCR;                    // Maximum Cascet Rate level of this Enmity Owner																			  
 };
 
 typedef std::unordered_map<uint16,EnmityObject_t> EnmityList_t;
@@ -67,6 +68,7 @@ public:
     void    DecayEnmity();
     bool    IsWithinEnmityRange(CBattleEntity* PEntity) const;
     int16   GetHighestTH() const;
+	int16   GetHighestCR() const;						  
     EnmityList_t* GetEnmityList();
     bool    IsTameable();
 

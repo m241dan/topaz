@@ -147,6 +147,8 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
 
         if (CE + VE > 0 && PEntity->getMod(Mod::TREASURE_HUNTER) > enmity_obj->second.maxTH)
             enmity_obj->second.maxTH = PEntity->getMod(Mod::TREASURE_HUNTER);
+		if (CE + VE > 0 && PEntity->getMod(Mod::CASKET_RATE) > enmity_obj->second.maxCR)
+			enmity_obj->second.maxCR = PEntity->getMod(Mod::CASKET_RATE);																		  																
     }
     else if (CE >= 0 && VE >= 0)
     {
@@ -161,6 +163,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         }
 
         int16 maxTH = CE + VE > 0 ? PEntity->getMod(Mod::TREASURE_HUNTER) : 0;
+		int16 maxCR = CE + VE > 0 ? PEntity->getMod(Mod::CASKET_RATE) : 0;															
 
         if (initial)
             CE += 200;
@@ -170,7 +173,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         CE = std::clamp((int32)(CE * bonus), 0, EnmityCap);
         VE = std::clamp((int32)(VE * bonus), 0, EnmityCap);
 
-        m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, maxTH});
+        m_EnmityList.emplace(PEntity->id, EnmityObject_t {PEntity, CE, VE, true, maxTH, maxCR});																	   
 
         if (withMaster && PEntity->PMaster != nullptr)
         {
@@ -441,6 +444,23 @@ int16 CEnmityContainer::GetHighestTH() const
     }
 
     return THLvl;
+}
+
+int16 CEnmityContainer::GetHighestCR() const
+{
+    CBattleEntity* PEntity = nullptr;
+    int16 CRLvl = 0;
+
+    for (auto it = m_EnmityList.cbegin(); it != m_EnmityList.cend(); ++it)
+    {
+        const EnmityObject_t& PEnmityObject = it->second;
+        PEntity = PEnmityObject.PEnmityOwner;
+
+        if (PEntity != nullptr && !PEntity->isDead() && IsWithinEnmityRange(PEntity) && PEnmityObject.maxCR > CRLvl)
+            CRLvl = PEnmityObject.maxCR;
+    }
+
+    return CRLvl;
 }
 
 EnmityList_t* CEnmityContainer::GetEnmityList()
