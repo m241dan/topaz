@@ -14159,7 +14159,7 @@ inline int32 CLuaBaseEntity::getTHlevel(lua_State* L)
 *  Notes   :
 ************************************************************************/
 
-inline int32 CLuaBaseEntity::getCRlevel(lua_State* L)
+inline int32 CLuaBaseEntity::getHighestCR(lua_State* L)
 {
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     TPZ_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
